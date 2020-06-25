@@ -11,7 +11,7 @@ bot.on('guildMemberAdd', member => {
     const channel = member.guild.channels.cache.find(ch => ch.name === 'bienvenue');
     if (!channel) return;
 
-    channel.send(`Bienvenue ${member} à Mineapolis, tu es fin prêt pour devenir mineapolitain fait !membre pour obtenir le grade Membre. Puis jette donc un coup d'oeil sur le règlement`)
+    channel.send(`Bienvenue ${member} à Mineapolis! Entre !membre pour obtenir le grade Membre puis jette donc un coup d'oeil sur le règlement.`)
     const embed = new Discord.MessageEmbed()
         .setTitle('Carte de Bienvenue')
         .setColor('0x00ff00')
