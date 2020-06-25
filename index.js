@@ -11,7 +11,7 @@ bot.on('guildMemberAdd', member => {
     const channel = member.guild.channels.cache.find(ch => ch.name === 'bienvenue');
     if (!channel) return;
 
-    channel.send(`Bienvenue ${member} à Mineapolis! Entre !membre pour obtenir le grade Membre puis jette donc un coup d'oeil sur le règlement.`)
+    channel.send(`Bienvenue ${member} à Mineapolis! Deviens membre en approuvant le règlement.`)
     const embed = new Discord.MessageEmbed()
         .setTitle('Carte de Bienvenue')
         .setColor('0x00ff00')
@@ -49,7 +49,7 @@ bot.on('messageReactionAdd', function(messageReaction,user) {
             }
         }
     }
-    console.log(messageReaction.emoji.identifier);
+    //console.log(messageReaction.emoji.identifier);
 } )
 
 bot.on('message', message => {
@@ -63,6 +63,9 @@ bot.on('message', message => {
             message.channel.send('pong!');
             break;
 
+        case 'ip' :
+            message.channel.send('bientôt disponible!');
+            break;
     }
 
 })
