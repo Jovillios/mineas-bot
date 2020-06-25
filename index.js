@@ -32,7 +32,7 @@ bot.on('messageReactionAdd', function(messageReaction,user) {
             if(!member.roles.cache.has(role.id))
             {
                 member.roles.add(role).catch(err => console.log(err)).then( () => {
-                    let channel = member.guild.channels.cache.find(ch => ch.name === 'role')
+                    let channel = member.guild.channels.cache.find(ch => ch.name === 'rôle')
                     if (channel) {
                         const embed = new Discord.MessageEmbed()
                             .setTitle('Nouveau Membre!')
