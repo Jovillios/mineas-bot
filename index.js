@@ -18,7 +18,7 @@ bot.on('guildMemberAdd', member => {
         .addField('nom du serveur', member.guild.toString())
         .addField('nom', member.user.username)
         .addField('numéro', member.guild.memberCount)
-        .setThumbnail(member.guild.iconURL)
+        .setThumbnail(member.user.displayAvatarURL())
     channel.send(embed);
 
 })
