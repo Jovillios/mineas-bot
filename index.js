@@ -5,6 +5,27 @@ const prefix = '!';
 
 bot.on('ready', () => {
     console.log('bot online!');
+
+    let guild = bot.guilds.cache.find(guild => guild.id === '725247291954561105')
+    let channel = guild.channels.cache.find(ch => ch.id === '725691188925038612')
+
+    channel.bu
+
+    const embed = new Discord.MessageEmbed()
+        .setTitle('Choisis ta faction!')
+        .addField('Agriculture','🌾')
+        .addField('Exploration','🏹')
+        .addField('Mécanique','🔧')
+        .addField('Ressources','💎')
+
+    channel.bulkDelete(1);
+    channel.send(embed).then(msg => {
+        msg.react('🌾')
+        msg.react('🏹')
+        msg.react('🔧')
+        msg.react('💎')
+    })
+
 })
 
 bot.on('guildMemberAdd', member => {
@@ -25,110 +46,45 @@ bot.on('guildMemberAdd', member => {
 
 bot.on('messageReactionAdd', function(messageReaction,user) {
 
+    if(user.bot) return;
     let member = user.presence.member;
-    const mem = member.guild.roles.cache.find(role => role.name === 'Membre');
-    const agri = member.guild.roles.cache.find(role => role.name ==='🌾Agriculteur');
-    const expl = member.guild.roles.cache.find(role => role.name ==='🏹Explorateur');
-    const meca = member.guild.roles.cache.find(role => role.name ==='🔧Mécanicien');
-    const mine = member.guild.roles.cache.find(role => role.name ==='💎Mineur');
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'rôle');
+    const agri = member.guild.roles.cache.find(role => role.id ==='725688658098651256');
+    const expl = member.guild.roles.cache.find(role => role.id ==='725689042020073533');
+    const meca = member.guild.roles.cache.find(role => role.id ==='725689047451959407');
+    const mine = member.guild.roles.cache.find(role => role.id ==='727810710909878353');
     const spe = member.roles.cache.has(agri.id) || member.roles.cache.has(expl) || member.roles.cache.has(meca) || member.roles.cache.has(mine);
 
-    if (messageReaction.emoji.identifier=='%E2%9C%85')
-    {
-        if(!mem) return;
-        if(member.roles.cache.has(mem.id)) return;
-    member.roles.add(mem).then( () => {
-            if(!channel) return;
-            const embed = new Discord.MessageEmbed()
-                .setTitle('Nouveau Membre!')
-                .setColor('0x3598db')
-                .setDescription('🎉 Félicitations! 🎊')
-                .addField('nom',user.username)
-                .addField('grade', 'Membre')
-                .setThumbnail(user.displayAvatarURL())
-            channel.send(`Hey ${member}, j'ai une bonne nouvelle pour toi!`);
-            channel.send(embed);
-        })
-    }
 
     if(messageReaction.emoji.identifier=='%F0%9F%8C%BE')
     {
         if(!agri) return;
         if(spe) return;
-        member.roles.add(agri).then( () => {
-            let channel = member.guild.channels.cache.find(ch => ch.name === 'rôle');
-            if(!channel) return;
-            const embed = new Discord.MessageEmbed()
-                .setTitle('Nouveau Agriculteur!')
-                .setDescription('🎉 Félicitations! 🎊')
-                .setColor('0x66ff33')
-                .addField('nom',user.username)
-                .addField('grade','Agriculteur')
-                .setThumbnail(user.displayAvatarURL())
-            channel.send(`Hey ${member}, ton choix est irrévocable!`);
-            channel.send(embed);
-        })
+        member.roles.add(agri)
     }
 
     if(messageReaction.emoji.identifier=='%F0%9F%8F%B9')
     {
         if(!expl) return;
         if(spe) return;
-        member.roles.add(expl).then( () => {
-            let channel = member.guild.channels.cache.find(ch => ch.name === 'rôle');
-            if(!channel) return;
-            const embed = new Discord.MessageEmbed()
-                .setTitle('Nouveaux Explorateur!')
-                .setDescription('🎉 Félicitations! 🎊')
-                .setColor('0xffff00')
-                .addField('nom',user.username)
-                .addField('grade','Explorateur')
-                .setThumbnail(user.displayAvatarURL())
-            channel.send(`Hey ${member}, ton choix est irrévocable!`);
-            channel.send(embed);
-        })
+        member.roles.add(expl)
     }
 
     if(messageReaction.emoji.identifier=='%F0%9F%94%A7')
     {
         if(!meca) return;
         if(spe) return;
-        member.roles.add(meca).then( () => {
-            let channel = member.guild.channels.cache.find(ch => ch.name === 'rôle');
-            if(!channel) return;
-            const embed = new Discord.MessageEmbed()
-                .setTitle('Nouveaux Mécanicien!')
-                .setDescription('🎉 Félicitations! 🎊')
-                .setColor('0xff0000')
-                .addField('nom',user.username)
-                .addField('grade','Mécanicien')
-                .setThumbnail(user.displayAvatarURL())
-            channel.send(`Hey ${member}, ton choix est irrévocable!`);
-            channel.send(embed);
-        })
+        member.roles.add(meca)
     }
 
     if(messageReaction.emoji.identifier=='%F0%9F%92%8E')
     {
         if(!mine) return;
         if(spe) return;
-        member.roles.add(mine).then( () => {
-            let channel = member.guild.channels.cache.find(ch => ch.name === 'rôle');
-            if(!channel) return;
-            const embed = new Discord.MessageEmbed()
-                .setTitle('Nouveaux Mineur!')
-                .setDescription('🎉 Félicitations! 🎊')
-                .setColor('0x0099ff')
-                .addField('nom',user.username)
-                .addField('grade','Mineur')
-                .setThumbnail(user.displayAvatarURL())
-            channel.send(`Hey ${member}, ton choix est irrévocable!`);
-            channel.send(embed);
-        })
+        member.roles.add(mine)
     }
     //console.log(messageReaction.emoji.identifier);
 } )
+
 
 bot.on('message', message => {
     if (message.content[0] != prefix) return;
@@ -148,5 +104,39 @@ bot.on('message', message => {
 
 })
 
+
+bot.on('guildMemberUpdate', (old_member, new_member) => {
+    let old_roles = old_member.roles.cache.array().map(role => role.name);
+    let new_roles = new_member.roles.cache.array().map(role => role.name);
+    
+
+    let minus = old_roles.filter(role => !new_roles.includes(role))
+    let plus = new_roles.filter(role => !old_roles.includes(role))
+
+    let role_channel = new_member.guild.channels.cache.find(ch => ch.id === '725652819914260601');
+    
+    for(let i = 0; i<minus.length;i++) {
+        const embed = new Discord.MessageEmbed()
+            .setTitle(`Ancien ${minus[i]}`)
+            .setColor('0xff0000')
+            .addField('Membre',new_member.user.username)
+            .addField('Ancien Rôle',minus[i])
+            .setThumbnail(new_member.user.displayAvatarURL())
+
+        role_channel.send(embed);
+    }
+
+    for(let i = 0; i<plus.length;i++) {
+        const embed = new Discord.MessageEmbed()
+            .setTitle(`Nouveau ${plus[i]}!`)
+            .setDescription('🎉 Félicitations! 🎊')
+            .setColor('0x00ff00')
+            .addField('Membre',new_member.user.username)
+            .addField('Nouveau Rôle',plus[i])
+            .setThumbnail(new_member.user.displayAvatarURL())
+
+        role_channel.send(embed);
+    }
+})
 
 bot.login(process.env.BOT_TOKEN);
