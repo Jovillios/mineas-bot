@@ -9,8 +9,6 @@ bot.on('ready', () => {
     let guild = bot.guilds.cache.find(guild => guild.id === '725247291954561105')
     let channel = guild.channels.cache.find(ch => ch.id === '725691188925038612')
 
-    channel.bu
-
     const embed = new Discord.MessageEmbed()
         .setTitle('Choisis ta faction!')
         .addField('Agriculture','🌾')
@@ -103,7 +101,7 @@ bot.on('message', message => {
 
         case 'craft':
             item = args[1].toLowerCase()
-            message.channel.send('Craft', {files : ['item/' + item + '/craft.png']}).catch( () => {
+            message.channel.send({files : ['item/' + item + '/craft.png']}).catch( () => {
                 message.channel.send('Item non trouvé!')
             })
             break;
