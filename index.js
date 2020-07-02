@@ -100,6 +100,13 @@ bot.on('message', message => {
         case 'ip' :
             message.channel.send('bientôt disponible!');
             break;
+
+        case 'craft':
+            item = args[1].toLowerCase()
+            message.channel.send('Craft', {files : ['item/' + item + '/craft.png']}).catch( () => {
+                message.channel.send('Item non trouvé!')
+            })
+            break;
     }
 
 })
@@ -138,5 +145,6 @@ bot.on('guildMemberUpdate', (old_member, new_member) => {
         role_channel.send(embed);
     }
 })
+
 
 bot.login(process.env.BOT_TOKEN);
