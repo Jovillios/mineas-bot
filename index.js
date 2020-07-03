@@ -27,7 +27,7 @@ bot.on('ready', () => {
 })
 
 bot.on('guildMemberAdd', member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'bienvenue');
+    const channel = member.guild.channels.cache.find(ch => ch.id === '725248089044156448');
     if (!channel) return;
 
     channel.send(`Bienvenue ${member} à Mineapolis! Deviens membre en approuvant le règlement.`)
